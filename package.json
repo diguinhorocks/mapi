@@ -1,0 +1,26 @@
+{
+  "name": "marvel-api",
+  "version": "1.0.0",
+  "description": "Marvel API for enternainment",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/diguinhorocks/mapi.git"
+  },
+  "keywords": [
+    "marvel",
+    "api"
+  ],
+  "author": "Rodrigo Santiago Motta",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/diguinhorocks/mapi/issues"
+  },
+  "homepage": "https://github.com/diguinhorocks/mapi#readme"
+}

@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/diguinhorocks/mapi/issues"
   },
-  "homepage": "https://github.com/diguinhorocks/mapi#readme"
+  "homepage": "https://github.com/diguinhorocks/mapi#readme",
+  "dependencies": {
+    "express": "^4.15.0"
+  }
 }

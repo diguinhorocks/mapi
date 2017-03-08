@@ -9,6 +9,11 @@ an easy-to-use Marvel API's API!
 ```
 	npm install
 ```
+
+#### Place Your Credentials
+
+get to src/config/config.js and set your apikey and private key
+
 #### Use it
 
 ```

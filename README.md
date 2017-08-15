@@ -2,7 +2,7 @@
 
 # MARVEL API
 
-an easy-to-use Marvel API's API!
+an easy-to-use Marvel API's!
 
 #### Installation
 
@@ -12,7 +12,7 @@ an easy-to-use Marvel API's API!
 
 #### Place Your Credentials
 
-get to src/config/config.js and set your apikey and private key
+head to src/config/config.js and set your apikey and private key
 
 #### Use it
 

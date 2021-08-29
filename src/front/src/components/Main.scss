@@ -1,0 +1,23 @@
+.main-logo {
+  position: fixed;
+  z-index: 999;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
+
+body {
+  width: 101%;
+  overflow: hidden;
+}
+
+@keyframes scrollToBottom {
+  from {
+    top: 0px;
+  }
+  100% {
+    top: 0px;
+  }
+  to {transform: translate(0, -100%)}
+}

@@ -1,3 +1,4 @@
+require('dotenv').config({ path: './src/api/.env' });
 const config = require('../config/config');
 const req = require('request-promise');
 const md5 = require('js-md5');

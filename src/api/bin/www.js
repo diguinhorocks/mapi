@@ -7,13 +7,18 @@
  import app from '../app';
  import debugLib from 'debug';
  import http from 'http';
+ const dotenv = require('dotenv').config({ path: './src/api/.env' });
  const debug = debugLib('mapi:server');
  
+if (dotenv.error) {
+  throw dotenv.error;
+}
+
  /**
   * Get port from environment and store in Express.
   */
  
- var port = normalizePort(process.env.PORT || '3000');
+ var port = normalizePort(process.env.PORT || '3001');
  app.set('port', port);
  
  /**

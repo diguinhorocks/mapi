@@ -1,10 +1,8 @@
-const dotenv = require('dotenv').config({ path: './src/api/.env' });
 const app = require('express')()
+const cors = require('cors');
 const Comic = require('./resources/comic');
 
-if (dotenv.error) {
-  throw dotenv.error;
-}
+app.use(cors());
 
 app.get('/comics', (req, res) => {
 

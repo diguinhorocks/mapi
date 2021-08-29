@@ -7,10 +7,10 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "node ./dist/api/bin/www",
+    "start": "node ./dist/bin/www",
     "build": "npm-run-all clean transpile",
     "dev": "NODE_ENV=development npm-run-all build server",
-    "transpile": "babel ./src --out-dir dist",
+    "transpile": "babel ./src/api --out-dir dist",
     "clean": "rimraf dist",
     "watch:dev": "nodemon"
   },
@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/diguinhorocks/mapi#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "debug": "~2.6.9",
     "dotenv": "^10.0.0",
     "express": "~4.16.1",

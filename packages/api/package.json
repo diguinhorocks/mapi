@@ -12,7 +12,7 @@
     "clean": "rimraf dist",
     "dev": "NODE_ENV=development npm-run-all build server",
     "lint": "npx eslint --fix *.js resources config bin test *.js",
-    "precommit": "lint-staged",
+    "precommit": "lint-staged && yarn test",
     "transpile": "npx babel ./ -d build",
     "test": "jest",
     "watch:dev": "nodemon --exec ./node_modules/@babel/node/bin/babel-node.js bin/www"

@@ -1,0 +1,10 @@
+{
+  "ignorePatterns": [
+    "node_modules/*", 
+    "src/reportWebVitals.js",
+    "src/setupTests.js"
+  ],
+  "rules": {
+      //...
+  }
+}

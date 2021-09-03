@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { Suspense } from 'react';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 

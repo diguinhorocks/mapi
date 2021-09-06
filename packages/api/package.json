@@ -12,9 +12,10 @@
     "clean": "rimraf dist",
     "dev": "NODE_ENV=development npm-run-all build server",
     "lint": "npx eslint --fix *.js resources config bin test *.js",
-    "precommit": "lint-staged && yarn test",
+    "precommit": "npx lint-staged && yarn test",
     "transpile": "npx babel ./ -d build",
     "test": "jest",
+    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "watch:dev": "nodemon --exec ./node_modules/@babel/node/bin/babel-node.js bin/www"
   },
   "repository": {
@@ -37,6 +38,8 @@
     "dotenv": "^10.0.0",
     "express": "~4.16.1",
     "js-md5": "^0.4.2",
+    "node-redis": "^0.1.7",
+    "promise-redis": "^0.0.5",
     "request": "^2.80.0",
     "request-promise": "^4.1.1"
   },

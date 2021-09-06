@@ -1,6 +1,7 @@
 .DS_STORE
 node_modules/
 dist/
-src/config/config.js
-src/api/.env
+packages/config/config.js
+packages/api/.env
 .husky/
+.env

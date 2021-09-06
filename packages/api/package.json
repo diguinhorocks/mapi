@@ -9,10 +9,10 @@
   "scripts": {
     "start": "nodemon --exec ./node_modules/@babel/node/bin/babel-node.js bin/www",
     "build": "npm-run-all clean transpile",
-    "clean": "rimraf dist",
+    "clean": "rimraf build",
     "dev": "NODE_ENV=development npm-run-all build server",
     "lint": "npx eslint --fix *.js resources config bin test *.js",
-    "precommit": "npx lint-staged && yarn test",
+    "precommit": "npx lint-staged",
     "transpile": "npx babel ./ -d build",
     "test": "jest",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",

@@ -30,7 +30,7 @@ const Main = () => {
   const loadComics = useCallback(async () => {
     setLoading(true);
     const offset = (page > 1) ? `&offset=${page * 100}` : '';
-    const { data } = await axios.get(`http://localhost:3001/comics?limit=100${offset}`);
+    const { data } = await axios.get(`http://localhost:5000/comics?limit=100${offset}`);
 
     if (data.code === 200) {
       const { data: { results: comicList } } = data;
@@ -57,7 +57,7 @@ const Main = () => {
 
   useEffect(() => {
     loadComics();
-  }, [loadComics]);
+  }, []);
 
   const onlyWithCoverImages = (comic) => comic.thumbnail.path !== 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available';
 
@@ -80,7 +80,7 @@ const Main = () => {
         </Masonry>
       </section>
       <footer ref={infiniteRef}>
-        <p><a href="http://marvel.com">Data provided by Marvel. © 2021 MARVEL</a></p>
+        <p><a href="http://marvel.com" target="_blank" rel="noreferrer">Data provided by Marvel. © 2021 MARVEL</a></p>
       </footer>
     </>
   );

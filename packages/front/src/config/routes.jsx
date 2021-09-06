@@ -3,7 +3,7 @@ import React, { Suspense } from 'react';
 import {
   Switch,
   Route,
-  BrowserRouter as Router 
+  BrowserRouter as Router,
 } from 'react-router-dom';
 
 const Main = React.lazy(() => import('../components/Main'));

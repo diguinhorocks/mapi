@@ -1,15 +1,33 @@
 const app = require('express')();
 const cors = require('cors');
+const redis = require('promise-redis')();
+
+const client = redis.createClient();
 const Comic = require('./resources/comic');
+
+client.on('error', (error) => {
+  throw new Error(error);
+});
 
 app.use(cors());
 
-app.get('/comics', (req, res) => {
+app.get('/comics', async (req, res) => {
   const limit = req.query.limit || 20;
   const offset = req.query.offset || 1;
 
-  Comic.get(limit, offset)
-    .then((comics) => res.json(comics))
+  const getComicListResult = async (comics) => {
+    await client.setex(`/comics?${JSON.stringify(req.query)}`, 14400, JSON.stringify(comics));
+    return res.json(comics);
+  };
+
+  const cacheResult = await client.get(`/comics?${JSON.stringify(req.query)}`);
+
+  if (cacheResult) {
+    return res.json(JSON.parse(cacheResult));
+  }
+
+  return Comic.get(limit, offset)
+    .then(getComicListResult)
     .catch((err) => res.json(err));
 });
 

@@ -3,7 +3,7 @@ import request from 'supertest';
 import app from '../../app';
 
 describe('app', () => {
-  it('GETs / and should obtain comics length', async () => {
+  it('GETs /comics and should obtain comics length', async () => {
     const res = await request(app)
       .get('/comics')
       .expect(200);

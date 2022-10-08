@@ -1,4 +1,4 @@
-<img src="./packages/front/public/app.png" alt="Marvel Logo" style="width: 500px;"/>
+<img src="./packages/front/public/app.png" alt="Marvel Logo" style="width: 100%;"/>
 
 # MARVEL APP
 

@@ -5,3 +5,4 @@ packages/config/config.js
 packages/api/.env
 .husky/
 .env
+.vscode

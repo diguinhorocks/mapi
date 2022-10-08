@@ -33,9 +33,21 @@ app.get('/comics', async (req, res) => {
     .catch((err) => res.json(err));
 });
 
-app.get('/comics/:id', (req, res) => {
-  Comic.read(req.params.id)
-    .then((comic) => res.json(comic))
+app.get('/comics/:id', async (req, res) => {
+
+  const getComicResult = async (comic) => {
+    await client.setex(`/comics/${comic.id}`, 14400, JSON.stringify(comics));
+    return res.json(comic);
+  };
+
+  const cacheResult = await client.get(`/comics/${req.params.id}`);
+
+  if (cacheResult) {
+    return res.json(JSON.parse(cacheResult));
+  }
+
+  return Comic.read(req.params.id)
+    .then(getComicResult)
     .catch((err) => res.json(err));
 });
 

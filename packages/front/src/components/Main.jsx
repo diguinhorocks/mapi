@@ -1,5 +1,5 @@
 import React, {
-  useState, useEffect, useRef, useCallback,
+  useState, useRef, useCallback, useEffect,
 } from 'react';
 import Masonry from 'react-responsive-masonry';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
@@ -13,18 +13,19 @@ const Main = () => {
   const [page, setPage] = useState(1);
   const [hasNextPage, setHasNextPage] = useState();
   const [loading, setLoading] = useState(false);
+  const [initialized, setInitialized] = useState(false);
 
   const pageRef = useRef(page);
   pageRef.current = page;
 
+  // eslint-disable-next-line no-unused-vars
   const applyAutoScroll = () => {
-    const height = document.querySelector('.main').clientHeight;
-    const duration = height * 0.02;
-    document.querySelector('.main').style.animation = `scrollToBottom ${duration}s linear infinite`;
-    setTimeout(() => {
-      // eslint-disable-next-line @typescript-eslint/no-use-before-define
-      loadComics();
-    }, (duration - 10) * 1000);
+    let counter = 1;
+    setInterval(() => {
+      counter += 0.1735479;
+      window
+        .scrollTo(0, (document.body.scrollHeight - (document.body.scrollHeight - (counter))));
+    }, 0);
   };
 
   const loadComics = useCallback(async () => {
@@ -37,9 +38,6 @@ const Main = () => {
       setLoading(false);
       setHasNextPage(true);
       setComics([...comics, ...comicList]);
-      setTimeout(() => {
-        applyAutoScroll();
-      }, 500);
     }
   });
 
@@ -55,17 +53,26 @@ const Main = () => {
     onLoadMore: handleLoadMore,
   });
 
-  useEffect(() => {
-    loadComics();
-  }, []);
-
   const onlyWithCoverImages = (comic) => comic.thumbnail.path !== 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available';
 
   const renderComic = (comic, key) => (
     <>
-      <img alt={key} src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`} style={{ width: '100%', display: 'block' }} />
+      <a href={`/comics/${comic.id}`}>
+        <img alt={key} key={1 + Math.random()} src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`} style={{ width: '100%', display: 'block' }} />
+      </a>
     </>
   );
+
+  useEffect(() => {
+    if (!initialized) {
+      setInitialized(true);
+      loadComics();
+      applyAutoScroll();
+    }
+    return () => {
+      setInitialized(false);
+    };
+  }, []);
 
   return (
     <>
@@ -80,7 +87,7 @@ const Main = () => {
         </Masonry>
       </section>
       <footer ref={infiniteRef}>
-        <p><a href="http://marvel.com" target="_blank" rel="noreferrer">Data provided by Marvel. © 2021 MARVEL</a></p>
+        <p><a href="https://marvel.com" target="_blank" rel="noreferrer">Data provided by Marvel. © 2021 MARVEL</a></p>
       </footer>
     </>
   );

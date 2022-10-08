@@ -2,7 +2,9 @@ const app = require('express')();
 const cors = require('cors');
 const redis = require('promise-redis')();
 
-const client = redis.createClient();
+const client = redis.createClient({
+  url: 'redis://default:redispw@127.0.0.1:55000'
+});
 const Comic = require('./resources/comic');
 
 client.on('error', (error) => {

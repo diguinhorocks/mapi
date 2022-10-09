@@ -1,9 +1,11 @@
+require('dotenv').config();
 const app = require('express')();
 const cors = require('cors');
 const redis = require('promise-redis')();
+const config = require('./config/config');
 
 const client = redis.createClient({
-  url: 'redis://default:redispw@127.0.0.1:55000'
+  url: config.redis.uri,
 });
 const Comic = require('./resources/comic');
 
@@ -34,7 +36,6 @@ app.get('/comics', async (req, res) => {
 });
 
 app.get('/comics/:id', async (req, res) => {
-
   const getComicResult = async (comic) => {
     await client.setex(`/comics/${comic.id}`, 14400, JSON.stringify(comics));
     return res.json(comic);

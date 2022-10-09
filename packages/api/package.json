@@ -13,7 +13,7 @@
     "dev": "NODE_ENV=development npm-run-all build server",
     "lint": "npx eslint --fix *.js resources config bin test *.js",
     "precommit": "npx lint-staged",
-    "transpile": "npx babel ./ -d build",
+    "transpile": "npx babel ./ -d build -s --ignore 'node_modules/**/*.js'",
     "test": "jest",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "watch:dev": "nodemon --exec ./node_modules/@babel/node/bin/babel-node.js bin/www"

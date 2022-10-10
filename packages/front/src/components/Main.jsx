@@ -1,8 +1,11 @@
 import React, {
   useState, useRef, useCallback, useEffect,
 } from 'react';
-import Masonry from 'react-responsive-masonry';
+import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
+import { Vortex } from 'react-loader-spinner';
+// eslint-disable-next-line import/no-unresolved
+// import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import marvel from '../marvel.svg';
 import './Main.scss';
 
@@ -29,9 +32,8 @@ const Main = () => {
   };
 
   const loadComics = useCallback(async () => {
-    setLoading(true);
     const offset = (page > 1) ? `&offset=${page * 100}` : '';
-    const { data } = await axios.get(`http://localhost:5000/comics?limit=100${offset}`);
+    const { data } = await axios.get(`https://api-marvel.rodrigosantiago.dev/comics?limit=100${offset}`);
 
     if (data.code === 200) {
       const { data: { results: comicList } } = data;
@@ -65,9 +67,10 @@ const Main = () => {
 
   useEffect(() => {
     if (!initialized) {
-      setInitialized(true);
+      setLoading(true);
       loadComics();
       applyAutoScroll();
+      setInitialized(true);
     }
     return () => {
       setInitialized(false);
@@ -76,19 +79,50 @@ const Main = () => {
 
   return (
     <>
-      <header>
-        <div className="main-logo">
-          <img width="800" src={marvel} alt="" />
-        </div>
-      </header>
-      <section className="main">
-        <Masonry columnsCount={7}>
-          {comics.filter(onlyWithCoverImages).map(renderComic)}
-        </Masonry>
-      </section>
-      <footer ref={infiniteRef}>
-        <p><a href="https://marvel.com" target="_blank" rel="noreferrer">Data provided by Marvel. © 2021 MARVEL</a></p>
-      </footer>
+      {loading && (
+        <>
+          <section className="loader">
+            <Vortex
+              visible
+              height="180"
+              width="180"
+              ariaLabel="vortex-loading"
+              wrapperStyle={{}}
+              wrapperClass="vortex-wrapper"
+              colors={['red', 'white', 'black', 'red', 'black', 'white']}
+            />
+          </section>
+        </>
+      )}
+      {!loading && (
+        <>
+          <header>
+            <div className="main-logo">
+              <img src={marvel} alt="" />
+            </div>
+          </header>
+          <section className="main">
+            <ResponsiveMasonry
+              columnsCountBreakPoints={{ 350: 3, 750: 5, 900: 7 }}
+            >
+              <Masonry columnsCount={7}>
+                {comics.filter(onlyWithCoverImages).map(renderComic)}
+              </Masonry>
+            </ResponsiveMasonry>
+          </section>
+          <footer ref={infiniteRef}>
+            <p>
+              <a
+                href="https://marvel.com"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Data provided by Marvel. © 2021 MARVEL
+              </a>
+            </p>
+          </footer>
+        </>
+      )}
     </>
   );
 };

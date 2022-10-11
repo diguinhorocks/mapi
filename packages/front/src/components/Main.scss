@@ -23,6 +23,15 @@ body {
   overflow: hidden;
 }
 
+.comic-img {
+  animation: fadeIn .5s;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
 @keyframes scrollToBottom {
   from {
     top: 0px;

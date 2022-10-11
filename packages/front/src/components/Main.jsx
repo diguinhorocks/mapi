@@ -4,8 +4,6 @@ import React, {
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 import { Vortex } from 'react-loader-spinner';
-// eslint-disable-next-line import/no-unresolved
-// import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import marvel from '../marvel.svg';
 import './Main.scss';
 
@@ -51,19 +49,22 @@ const Main = () => {
   const [infiniteRef] = useInfiniteScroll({
     loading,
     hasNextPage,
-    rootMargin: '0px 0px 1400px 0px',
+    rootMargin: '0px 0px 600px 0px',
     onLoadMore: handleLoadMore,
   });
 
   const onlyWithCoverImages = (comic) => comic.thumbnail.path !== 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available';
 
-  const renderComic = (comic, key) => (
-    <>
-      <a href={`/comics/${comic.id}`}>
-        <img alt={key} key={1 + Math.random()} src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`} style={{ width: '100%', display: 'block' }} />
-      </a>
-    </>
-  );
+  const renderComic = (comic, key) => {
+    const path = comic.thumbnail.path.replace('http://', 'https://');
+    return (
+      <>
+        <a href={`/comics/${comic.id}`}>
+          <img className="comic-img" alt={key} key={1 + Math.random()} src={`${path}.${comic.thumbnail.extension}`} style={{ width: '100%', display: 'block' }} />
+        </a>
+      </>
+    );
+  };
 
   useEffect(() => {
     if (!initialized) {
